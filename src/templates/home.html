@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="page">
+    <div class="page-main">
+      {% include 'nav.html' %}
+      <h1>Hello {{ username }}</h1>
+      {% include 'footer.html' %}
+    </div>
+  </div>
+{% endblock %}

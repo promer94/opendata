@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="page">
+    <div class="page-single">
+      <div class="container">
+        <div class="row">
+          <div class="col col-login mx-auto">
+            <div class="text-center mb-6">
+              <!--logo -->
+            </div>
+            <form class="card" action="{% url 'auth:register' %}" method="post">
+              {% csrf_token %}
+              <div class="card-body p-6">
+                <div class="card-title">Create new account</div>
+                {% for field in form.visible_fields %}
+                  <div class="form-group{% if field.errors %} has-error{% endif %}">
+                    <label for="{{ field.label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                      <span class="help-block">{{ field.help_text|safe }}</span>
+                    {% endif %}
+                    {% for error in field.errors %}
+                      <label class="control-label">{{ error }}</label>
+                    {% endfor %}
+                  </div>
+                {% endfor %}
+                <div class="form-footer">
+                  <button type="submit" class="btn btn-primary btn-block">Create new account</button>
+                </div>
+              </div>
+            </form>
+            <div class="text-center text-muted">
+              <!-- Social login -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
