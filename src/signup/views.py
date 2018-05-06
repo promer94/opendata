@@ -8,7 +8,7 @@ def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if not form.is_valid():
-            return render(request, 'signup/register.html', {'form': SignUpForm()})
+            return render(request, 'signup/register.html', {'form': SignUpForm(), 'errors': form.errors})
         else:
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')

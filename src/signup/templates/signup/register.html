@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-  <div class="page">
-    <div class="page-single">
+  <div id="particles-js">
       <div class="container">
+      <div class="row">
+          {% if errors %}
+              <div class="col col-login mx-auto alert alert-danger alert-dismissable">
+                {{ errors }}
+              </div>
+          {% endif %}
+        </div>
         <div class="row">
           <div class="col col-login mx-auto">
             <div class="text-center mb-6">
-              <!--logo -->
             </div>
             <form class="card" action="{% url 'auth:register' %}" method="post">
               {% csrf_token %}
@@ -19,11 +25,8 @@
                     {% if field.help_text %}
                       <span class="help-block">{{ field.help_text|safe }}</span>
                     {% endif %}
-                    {% for error in field.errors %}
-                      <label class="control-label">{{ error }}</label>
                     {% endfor %}
                   </div>
-                {% endfor %}
                 <div class="form-footer">
                   <button type="submit" class="btn btn-primary btn-block">Create new account</button>
                 </div>
@@ -35,6 +38,5 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 {% endblock %}
