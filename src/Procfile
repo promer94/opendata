@@ -1,1 +1,1 @@
-web: gunicorn fitsecret.wsgi
+web: gunicorn fitsecret.wsgi --log-file -
