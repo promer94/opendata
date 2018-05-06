@@ -1,10 +1,25 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
   <div class="page">
     <div class="page-main">
       {% include 'nav.html' %}
-      <h1>Hello {{ username }}</h1>
+      <div class="my-3 my-md-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <canvas id="myChart1"></canvas>
+            </div>
+            <div class="col-lg-6">
+              <canvas id="myChart2"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
       {% include 'footer.html' %}
     </div>
   </div>
+{% endblock %}
+{% block script %}
+  <script src="{% static 'assets/js/home.js' %}"></script>
 {% endblock %}
