@@ -3,7 +3,7 @@ bin
 include
 lib
 # Created by https://www.gitignore.io
-
+.idea
 ### OSX ###
 .DS_Store
 .AppleDouble
