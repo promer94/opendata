@@ -138,7 +138,10 @@ class Fatsecret:
                     return True
 
                 elif key == 'foods':
-                    return response.json()[key]['food']
+                    return response.json()[key]['food'], \
+                           response.json()[key]['max_results'], \
+                           response.json()[key]['page_number'], \
+                           response.json()[key]['total_results']
 
                 elif key == 'recipes':
                     return response.json()[key]['recipe']

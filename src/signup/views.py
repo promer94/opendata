@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from .forms import SignUpForm
+from .models import Profile
 
 
 def register(request):
@@ -13,11 +14,11 @@ def register(request):
             username = form.cleaned_data.get('username')
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password')
-            User.objects.create_user(username=username, password=password,
-                                     email=email)
+            new_user = User.objects.create_user(username=username, password=password, email=email)
+            Profile.objects.create_profile(new_user)
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('/')
+            return redirect('/home')
     else:
         return render(request, 'signup/register.html', {'form': SignUpForm()})
 
@@ -27,6 +28,6 @@ def home(request):
         context = {'username': request.user.get_username()}
         return render(request, 'home.html', context)
     else:
-        return redirect('/login')
+        return redirect('/')
 
 

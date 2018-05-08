@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'signup.apps.SignupConfig',
-    'storages'
+    'storages',
+    'app.apps.AppConfig'
 ]
 
 MIDDLEWARE = [
@@ -86,6 +87,7 @@ DATABASES = {
             # Have to set like this rather than localhost
             'host': '127.0.0.1',
             'port': 3306,
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         },
     }
 }
@@ -123,7 +125,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/home'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
