@@ -2,33 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ea054d48-6e19-45d5-8f45-fb79638c14d8" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/fatsecret/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/fatsecret/fatsecret.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/templates/app/search.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/signup/migrations/0002_auto_20180506_2319.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fatsecret/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fatsecret/fatsecret.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fitsecret/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/fitsecret/settings/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fitsecret/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/fitsecret/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signup/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/signup/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signup/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/signup/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signup/templates/signup/cover.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/signup/templates/signup/cover.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signup/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/signup/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signup/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/signup/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/nav.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,7 +17,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
@@ -50,6 +25,15 @@
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="634">
+              <caret line="92" column="10" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -177,7 +161,6 @@
         <option value="$PROJECT_DIR$/src/signup/admin.py" />
         <option value="$PROJECT_DIR$/src/manage.py" />
         <option value="$PROJECT_DIR$/src/templates/base.html" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/signup/views.py" />
         <option value="$PROJECT_DIR$/src/app/urls.py" />
         <option value="$PROJECT_DIR$/src/signup/urls.py" />
@@ -188,6 +171,7 @@
         <option value="$PROJECT_DIR$/src/templates/nav.html" />
         <option value="$PROJECT_DIR$/src/app/templates/app/search.html" />
         <option value="$PROJECT_DIR$/src/app/views.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -231,82 +215,6 @@
               <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
               <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="fatsecret" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="fitsecret" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="fitsecret" type="462c0819:PsiDirectoryNode" />
-              <item name="settings" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="fitsecret" type="462c0819:PsiDirectoryNode" />
-              <item name="settings" type="462c0819:PsiDirectoryNode" />
-              <item name="aws" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="signup" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="signup" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="signup" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="signup" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FitSecret" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FitSecret" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -460,15 +368,15 @@
       <window_info anchor="bottom" id="Version Control" order="1" weight="0.3281046" />
       <window_info anchor="bottom" id="Python Console" order="3" weight="0.32933578" />
       <window_info anchor="bottom" id="Run" order="8" weight="0.32796934" />
-      <window_info anchor="bottom" id="Terminal" order="4" weight="0.3249042" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.089032255" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" visible="true" weight="0.3249042" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.089032255" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="2" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.32873562" />
       <window_info anchor="right" id="SciView" order="0" />
       <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="9" visible="true" weight="0.39846742" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.39846742" />
       <window_info id="Designer" order="2" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="right" id="Palette" order="3" />
@@ -577,13 +485,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1022">
           <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -905,6 +806,13 @@
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="634">
+          <caret line="92" column="10" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
         </state>
       </provider>
     </entry>
