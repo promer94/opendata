@@ -25,17 +25,30 @@
     </div>
   </div>
   <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
+    <ul class="pagination justify-content-center row">
+      {% if previous_page %}
+        <li class="page-item">
+          <a class="page-link" href="?food={{ food }}&page={{ previous_page }}">Previous</a>
+        </li>
+      {% endif %}
+      <li class="page-item">
+        <div class="page-link">{{ page }} of {{ total_page }}</div>
+      </li>
+      {% if next_page %}
+        <li class="page-item">
+          <a class="page-link" href="?food={{ food }}&page={{ next_page }}">Next</a>
+        </li>
+      {% endif %}
+    </ul>
+    <form action="/search" class="form-inline pagination justify-content-center row">
+      <div class="form-group mx-sm-1 mb-2">
+        <label for="pageNumber" class="sr-only"></label>
+        <label for="foodName" class="sr-only"></label>
+        <input type="text" class="d-none" value="{{ food }}" name="food" id="foodName">
+        <input type="number" class="form-control" id="pageNumber" placeholder="{{ page }}" name="page">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Go</button>
+    </form>
   </nav>
   {% include 'footer.html' %}
 {% endblock %}

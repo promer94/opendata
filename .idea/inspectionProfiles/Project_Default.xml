@@ -221,6 +221,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="src.signup.forms._" />
+          <option value="src.signup.models.app" />
         </list>
       </option>
     </inspection_tool>

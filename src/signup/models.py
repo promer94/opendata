@@ -1,7 +1,7 @@
 import os
 from django.db import models
 from django.contrib.auth.models import User
-from src.app.fatsecret import Fatsecret
+from app.fatsecret import Fatsecret
 
 
 class ProfileManager(models.Manager):

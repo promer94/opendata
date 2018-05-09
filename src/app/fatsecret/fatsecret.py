@@ -273,11 +273,16 @@ class Fatsecret:
         :type max_results: int
         """
         params = {'method': 'foods.search', 'search_expression': search_expression, 'format': 'json'}
+        print(page_number, max_results)
+        if page_number is not None and max_results is not None:
+            params = {'method': 'foods.search',
+                      'search_expression': search_expression,
+                      'format': 'json',
+                      'page_number': page_number,
+                      'max_results': max_results
+                      }
 
-        if page_number and max_results:
-            params['page_number'] = page_number
-            params['max_results'] = max_results
-
+        print(params)
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
 
