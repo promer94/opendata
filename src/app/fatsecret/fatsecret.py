@@ -5,7 +5,6 @@
 """
 
 import datetime
-
 from rauth.service import OAuth1Service
 
 
@@ -273,7 +272,6 @@ class Fatsecret:
         :type max_results: int
         """
         params = {'method': 'foods.search', 'search_expression': search_expression, 'format': 'json'}
-        print(page_number, max_results)
         if page_number is not None and max_results is not None:
             params = {'method': 'foods.search',
                       'search_expression': search_expression,
@@ -641,7 +639,7 @@ class Fatsecret:
                   'food_entry_name': food_entry_name, 'serving_id': serving_id, 'number_of_units': number_of_units,
                   'meal': meal}
 
-        if date:
+        if date is not None:
             params['date'] = self.unix_time(date)
 
         response = self.session.get(self.api_url, params=params)
@@ -733,7 +731,7 @@ class Fatsecret:
 
         params = {'method': 'exercise_entries.get_month', 'format': 'json'}
 
-        if date:
+        if date is not None:
             params['date'] = self.unix_time(date)
 
         response = self.session.get(self.api_url, params=params)
@@ -751,7 +749,7 @@ class Fatsecret:
         """
         params = {'method': 'exercise_entries.get_month', 'format': 'json', 'days': int(days)}
 
-        if date:
+        if date is not None:
             params['date'] = self.unix_time(date)
 
         response = self.session.get(self.api_url, params=params)
@@ -787,7 +785,7 @@ class Fatsecret:
         params = {'method': 'exercise_entry.edit', 'format': 'json', 'shift_to_id': shift_to_id,
                   'shift_from_id': shift_from_id, 'minutes': minutes}
 
-        if date:
+        if date is not None:
             params['date'] = self.unix_time(date)
 
         if shift_to_id == 0:
@@ -830,13 +828,13 @@ class Fatsecret:
         params = {'method': 'weight.update', 'format': 'json', 'current_weight_kg': current_weight_kg,
                   'weight_type': weight_type, 'height_type': height_type}
 
-        if date:
+        if date is not None:
             params['date'] = self.unix_time(date)
-        if goal_weight_kg:
+        if goal_weight_kg is not None:
             params['goal_weight_kg'] = goal_weight_kg
-        if current_height_cm:
+        if current_height_cm is not None:
             params['current_height_cm'] = current_height_cm
-        if comment:
+        if comment is not None:
             params['comment'] = comment
 
         response = self.session.get(self.api_url, params=params)
@@ -851,7 +849,7 @@ class Fatsecret:
 
         params = {'method': 'weights.get_month', 'format': 'json'}
 
-        if date:
+        if date is not None:
             params['date'] = self.unix_time(date)
 
         response = self.session.get(self.api_url, params=params)

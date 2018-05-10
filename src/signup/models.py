@@ -6,7 +6,7 @@ from app.fatsecret import Fatsecret
 
 class ProfileManager(models.Manager):
     def create_profile(self, user):
-        fs = Fatsecret(os.environ.get('API_KEY', '303b21a907694b1ea8d5cbdc0d817774'), os.environ.get('API_SECRET', '0aefd2d9ba604cbfa5c0a79a910cb419'))
+        fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get('API_SECRET'))
         session_token = fs.profile_create()
         profile = self.create(user=user, auth_token=session_token[0], auth_secret=session_token[1])
         return profile
