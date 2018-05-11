@@ -19,7 +19,7 @@ def search(request):
                    os.environ.get('API_SECRET'))
 
     # Pagination
-    result, max_results, page_number, total_result = fs.foods_search(food, page_number=page - 1, max_results=12)
+    result, max_results, page_number, total_result = fs.foods_search(food, page_number=page - 1, max_results=6)
     total_result = int(total_result)
     total_page = int(int(total_result) / int(max_results)) + 1
 
@@ -86,4 +86,4 @@ def entry_create(request):
             FoodEntry.objects.create(profile=current_profile, food_entry_id=food_entry_id)
             return JsonResponse({'success': 1})
     else:
-        return JsonResponse({'error': 'Not a page'})
+        raise HttpResponseBadRequest

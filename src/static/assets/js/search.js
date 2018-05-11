@@ -1,4 +1,5 @@
-$("#food-entry-form").submit(function (e) {
+$( document ).ready(function() {
+    $("#food-entry-form").submit(function (e) {
     e.preventDefault();
     let data = $("#food-entry-form").serialize();
     console.log(data);
@@ -16,4 +17,5 @@ $("#food-entry-form").submit(function (e) {
             console.log( "Request failed: " + textStatus );
         }
     )
+});
 });

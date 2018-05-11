@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
   {% include 'nav.html' %}
-  <div class="container d-flex">
+  <div class="container">
     <div class="row">
       {% for item in result_list %}
         <div class="col-sm-12">
@@ -23,10 +23,10 @@
               </ul>
             </div>
             <div class="card-body">
-              <form action="/food_entry/add" class="form-inline pagination justify-content-center" method="post"
+              <form action="{% url 'food_entry_create' %} " class="form-inline pagination justify-content-center" method="post"
                     id="food-entry-form">
                 {% csrf_token %}
-                <div class="form-group mx-sm-1 mb-2">
+                <div class="form-group mb-2 row">
                   <label for="unitNumber" class="sr-only"></label>
                   <label for="foodId" class="sr-only"></label>
                   <label for="food_meal" class="sr-only"></label>
