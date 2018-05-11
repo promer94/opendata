@@ -14,6 +14,7 @@ class ProfileManager(models.Manager):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    create_date = models.DateField(auto_now_add=True)
     auth_token = models.CharField(max_length=50, null=True, blank=True)
     auth_secret = models.CharField(max_length=50, null=True, blank=True)
     objects = ProfileManager()

@@ -279,8 +279,6 @@ class Fatsecret:
                       'page_number': page_number,
                       'max_results': max_results
                       }
-
-        print(params)
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
 
@@ -634,7 +632,7 @@ class Fatsecret:
         :param date: Day to create food entry on (default value is the current day).
         :type date: datetime.datetime
         """
-
+        serving_id = int(serving_id)
         params = {'method': 'food_entry.create', 'format': 'json', 'food_id': food_id,
                   'food_entry_name': food_entry_name, 'serving_id': serving_id, 'number_of_units': number_of_units,
                   'meal': meal}

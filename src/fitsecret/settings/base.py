@@ -81,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'db': 'fitsecret',
+            'db': 'app',
             'user': 'root',
             'password': 'root',
             # Have to set like this rather than localhost
