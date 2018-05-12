@@ -164,13 +164,22 @@ class Fatsecret:
                         return entries
 
                 elif key == 'month':
-                    return response.json()[key]['day']
+                    if 'day' not in response.json()[key]:
+                        return []
+                    entries = response.json()[key]['day']
+                    if type(entries) == dict:
+                        return [entries]
+                    elif type(entries) == list:
+                        return entries
 
                 elif key == 'profile':
                     if 'auth_token' in response.json()[key]:
                         return response.json()[key]['auth_token'], response.json()[key]['auth_secret']
                     else:
                         return response.json()[key]
+
+                elif key == 'exercise_entries':
+                    return response.json()[key]['exercise_entry']
 
                 elif key in ('food', 'recipe', 'recipe_types', 'saved_meal_id', 'saved_meal_item_id', 'food_entry_id'):
                     return response.json()[key]
@@ -279,6 +288,7 @@ class Fatsecret:
                       'page_number': page_number,
                       'max_results': max_results
                       }
+
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
 
@@ -592,9 +602,9 @@ class Fatsecret:
 
         params = {'method': 'food_entries.get', 'format': 'json'}
 
-        if food_entry_id:
+        if food_entry_id is not None:
             params['food_entry_id'] = food_entry_id
-        elif date:
+        elif date is not None:
             params['date'] = self.unix_time(date)
         else:
             return  # exit without running as no valid parameter was provided
@@ -754,7 +764,7 @@ class Fatsecret:
         return self.valid_response(response)
 
     def exercise_entry_edit(self, shift_to_id, shift_from_id, minutes, date=None, shift_to_name=None,
-                            shift_from_name=None, kcals=None):
+                            shift_from_name=None, kcal=None):
         """ Records a change to a user's exercise diary entry for a nominated date.
         All changes to an exercise diary involve either increasing the duration of an existing activity or
         introducing a new activity for a nominated duration. Because there are always 24 hours worth of exercise
@@ -786,19 +796,18 @@ class Fatsecret:
         if date is not None:
             params['date'] = self.unix_time(date)
 
-        if shift_to_id == 0:
-            if shift_to_name:
+        if shift_to_id == '0':
+            if shift_to_name is not None and kcal is not None:
                 params['shift_to_name'] = shift_to_name
-            elif kcals:
-                params['kcals'] = kcals
+                params['kcal'] = kcal
             else:
                 return
-        if shift_from_id == 0:
+        if shift_from_id == '0':
             if shift_from_name:
                 params['shift_from_name'] = shift_from_name
             else:
                 return
-
+        print(params)
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
 
