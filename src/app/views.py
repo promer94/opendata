@@ -72,10 +72,11 @@ def entry_create(request):
         food_id = request.POST.get('food')
         meal = request.POST.get('meal')
         serving_id = request.POST.get('servingId')
-        unit_number = float(request.POST.get('unit'))
+        unit_number = request.POST.get('unit')
         if unit_number == '':
             return JsonResponse({'error': 1})
         else:
+            unit_number = float(request.POST.get('unit'))
             food_serve_name = current_date + ',' + current_user.get_username() + ',' + meal
             food_entry_id = fs.food_entry_create(food_id,
                                                  food_serve_name,

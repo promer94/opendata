@@ -1,13 +1,14 @@
+{% load static %}
 <div class="header py-4">
   <div class="container">
     <div class="d-flex">
       <a class="header-brand" href="{% url 'auth:home' %}">
-        <!-- Logo -->
+        <img src="{% static 'assets/images/pikachu.svg' %}" class="header-brand-img" alt="logo">FitSecret
       </a>
       <div class="d-flex order-lg-2 ml-auto">
         <div class="dropdown">
           <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
-            <!-- <span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span> -->
+            <span class="avatar" style="background-image: url(https://lh3.googleusercontent.com/-EZnfGPvftkI/AAAAAAAAAAI/AAAAAAAAA5I/in5JbhZ3bp8/s120-p-rw-no/photo.jpg)"></span>
             <span class="ml-2 d-none d-lg-block">
                       <span class="text-default">{{ username }}</span>
                       <small class="text-muted d-block mt-1">Welcome</small>

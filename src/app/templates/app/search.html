@@ -15,6 +15,15 @@
                                                                               style="color:red"></i></a>
               </div>
             </div>
+          <div id="{{ item.food_id }}success_message" class="card-alert alert alert-success mb-0" style="display: none;">
+            Success !
+                  </div>
+          <div id="{{ item.food_id }}error_message" class="card-alert alert alert-danger mb-0" style="display: none;">
+            Error, please add valid unit !
+          </div>
+          <div id="{{ item.food_id }}error_network_message" class="card-alert alert alert-danger mb-0" style="display: none;">
+            Network error !
+          </div>
             <div class="card-body">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item card-text">
@@ -24,28 +33,28 @@
             </div>
             <div class="card-body">
               <form action="{% url 'food_entry_create' %} " class="form-inline pagination justify-content-center" method="post"
-                    id="food-entry-form">
+                    id="{{ item.food_id }}" >
                 {% csrf_token %}
                 <div class="form-group mb-2 row">
-                  <label for="unitNumber" class="sr-only"></label>
-                  <label for="foodId" class="sr-only"></label>
-                  <label for="food_meal" class="sr-only"></label>
-                  <label for="serving_methods" class="sr-only"></label>
-                  <select id="food_meal" class="form-control" name="meal">
+                  <label for="{{ item.food_id }}unitNumber" class="sr-only"></label>
+                  <label for="{{ item.food_id }}foodId" class="sr-only"></label>
+                  <label for="{{ item.food_id }}food_meal" class="sr-only"></label>
+                  <label for="{{ item.food_id }}serving_methods" class="sr-only"></label>
+                  <select id="{{ item.food_id }}food_meal" class="form-control" name="meal">
                     <option value="breakfast">Breakfast</option>
                     <option value="lunch">Lunch</option>
                     <option value="dinner">Dinner</option>
                     <option value="other">Other</option>
                   </select>
-                  <select id="serving_methods" class="form-control" name="servingId" name="servingId">
+                  <select id="{{ item.food_id }}serving_methods" class="form-control" name="servingId" name="servingId">
                     {% for serving_method in item.serving_methods %}
                       <option value="{{ serving_method.serving_id }}">{{ serving_method.serving_description }}, Calories:{{ serving_method.calories }}</option>
                     {% endfor %}
                   </select>
-                  <input type="text" class="d-none" value="{{ item.food_id }}" name="food" id="foodId"/>
-                  <input type="text" class="form-control" id="unitNumber"
+                  <input type="text" class="d-none" value="{{ item.food_id }}" name="food" id="{{ item.food_id }}foodId"/>
+                  <input type="text" class="form-control" id="{{ item.food_id }}unitNumber"
                          placeholder="Number of the unit" name="unit">
-                  <button id="food-entry-submit" type="submit" class="btn btn-primary">Add</button>
+                  <button id="{{ item.food_id }}food-entry-submit" type="submit" class="btn btn-primary">Add</button>
                 </div>
               </form>
             </div>
