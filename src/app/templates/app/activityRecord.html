@@ -1,0 +1,394 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  {% include 'nav.html' %}
+  <div class="my-3 my-md-5">
+    <div class="container">
+      <div class="page-header"><h2>Today activities: {{ activities_calories }}kcal </h2></div>
+      <div class="row row-card">
+        {% if record %}
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <canvas id="myChart"></canvas>
+              </div>
+              <div class="card-body">
+                <form action="#" class="form-inline pagination justify-content-center row">
+                  <div class="form-group mx-sm-1 mb-2">
+                    <label for="select"></label>
+                    <label for="sportTime"></label>
+                    <label for="replaceSelect"></label>
+                  <select name="newType" id="select" class="form-control">
+                      <option value="77">Abdominal (Sit Ups)</option>
+                      <option value="135">Aerobics</option>
+                      <option value="144">Air Climber</option>
+
+                      <option value="137">Arc Trainer</option>
+
+                      <option value="149">Archery</option>
+
+                      <option value="3">Badminton</option>
+
+                      <option value="124">Ballet</option>
+
+                      <option value="174">Baseball</option>
+
+                      <option value="4">Basketball</option>
+
+                      <option value="125">Bathing</option>
+
+                      <option value="5">Bicycling (fast) - 15/mph</option>
+
+                      <option value="6">Bicycling (leisurely) - &lt;10/mph</option>
+
+                      <option value="7">Bicycling (moderate) - 13/mph</option>
+
+                      <option value="8">Bicycling (slow) - 11/mph</option>
+
+                      <option value="9">Bicycling (very fast) - 17.5/mph</option>
+
+                      <option value="73">Bike Machine (Cycling)</option>
+
+                      <option value="10">Boating or Canoeing</option>
+
+                      <option value="140">Body Attack</option>
+
+                      <option value="142">Body Balance</option>
+
+                      <option value="99">Body Combat</option>
+
+                      <option value="96">Body Pump</option>
+
+                      <option value="11">Bowling</option>
+
+                      <option value="12">Boxing</option>
+
+                      <option value="85">Breastfeeding</option>
+
+                      <option value="13">Calisthenics (heavy, e.g. pushups)</option>
+
+                      <option value="14">Calisthenics (light, e.g. home exercise)</option>
+
+                      <option value="87">Cardio</option>
+
+                      <option value="68">Circuit Training</option>
+
+                      <option value="94">Cleaning</option>
+
+                      <option value="15">Conditioning exercise (health club)</option>
+
+                      <option value="98">Cooking</option>
+
+                      <option value="16">Cricket</option>
+
+                      <option value="91">Cross Training</option>
+
+                      <option value="107">Crossfit</option>
+
+                      <option value="169">Curves</option>
+
+                      <option value="158">CX</option>
+
+                      <option value="17">Dance (fast step, aerobic)</option>
+
+                      <option value="18">Dance (slow step)</option>
+
+                      <option value="19">Dance (square dancing)</option>
+
+                      <option value="20">Desk Work</option>
+
+                      <option value="151">Do It Yourself (DIY)</option>
+
+                      <option value="21">Driving</option>
+
+                      <option value="84">Elliptical</option>
+
+                      <option value="163">Endurance Sport</option>
+
+                      <option value="89">Exercise Machine</option>
+
+                      <option value="64">Exercise machine (fast)</option>
+
+                      <option value="63">Exercise machine (moderate)</option>
+
+                      <option value="62">Exercise machine (slow)</option>
+
+                      <option value="22">Fishing</option>
+
+                      <option value="74">Fitness Training (Workout)</option>
+
+                      <option value="155">Floorball</option>
+
+                      <option value="23">Football</option>
+
+                      <option value="24">Golf (cart)</option>
+
+                      <option value="25">Golf (walking)</option>
+
+                      <option value="152">GRIT</option>
+
+                      <option value="111">Grocery Shopping</option>
+
+                      <option value="76">Gym</option>
+
+                      <option value="148">Handball</option>
+
+                      <option value="164">Hanging Laundry</option>
+
+                      <option value="90">High Intensity Interval Training (HIIT)</option>
+
+                      <option value="70">Hiking</option>
+
+                      <option value="26">Hockey</option>
+
+                      <option value="27">Horseback Riding</option>
+
+                      <option value="28">Housework</option>
+
+                      <option value="93">Hula Hoop</option>
+
+                      <option value="29">Hunting</option>
+
+                      <option value="173">Ice Hockey</option>
+
+                      <option value="106">Insanity</option>
+
+                      <option value="95">Ironing</option>
+
+                      <option value="161">Jiu Jitsu</option>
+
+                      <option value="121">Judo</option>
+
+                      <option value="162">Jumping Jacks (Star Jumps)</option>
+
+                      <option value="146">Kangoo</option>
+
+                      <option value="165">Karaoke</option>
+
+                      <option value="123">Karate</option>
+
+                      <option value="178">Kayaking</option>
+
+                      <option value="172">Kettlebells</option>
+
+                      <option value="136">Kickboxing</option>
+
+                      <option value="30">Lacrosse</option>
+
+                      <option value="130">Martial Arts</option>
+
+                      <option value="118">Massage</option>
+
+                      <option value="147">Motorbike Riding</option>
+
+                      <option value="31">Motor-Cross</option>
+
+                      <option value="131">Mountain Biking</option>
+
+                      <option value="112">Mowing Lawn</option>
+
+                      <option value="160">Muay Thai</option>
+
+                      <option value="32">Music playing</option>
+
+                      <option value="176">Netball</option>
+
+                      <option value="115">Nordic Walking</option>
+
+                      <option value="157">P90X</option>
+
+                      <option value="153">Padel Tennis</option>
+
+                      <option value="141">Painting</option>
+
+                      <option value="119">Pedalling</option>
+
+                      <option value="67">Pilates</option>
+
+                      <option value="134">Pole Dancing</option>
+
+                      <option value="145">Power Jump</option>
+
+                      <option value="171">Power Walking</option>
+
+                      <option value="86">Race</option>
+
+                      <option value="33">Racquetball</option>
+
+                      <option value="175">Raking</option>
+
+                      <option value="105">Reading</option>
+
+                      <option value="103">Rock Climbing</option>
+
+                      <option value="34">Roller Blading</option>
+
+                      <option value="102">Rowing</option>
+
+                      <option value="110">RPM</option>
+
+                      <option value="35">Running - 10/mph</option>
+
+                      <option value="36">Running - 6/mph</option>
+
+                      <option value="37">Running - 7/mph</option>
+
+                      <option value="38">Running - 8/mph</option>
+
+                      <option value="39">Running - 9/mph</option>
+
+                      <option value="40">Running (jogging) - 5/mph</option>
+
+                      <option value="41">Sailing</option>
+
+                      <option value="92">Sauna</option>
+
+                      <option value="170">Scooter</option>
+
+                      <option value="128">Scuba Diving</option>
+
+                      <option value="116">Sewing</option>
+
+                      <option value="72">Sexual Activity</option>
+
+                      <option value="66">Shopping</option>
+
+                      <option value="42">Shoveling</option>
+
+                      <option value="167">Shoveling Snow</option>
+
+                      <option value="109">Showering</option>
+
+                      <option value="117">Singing</option>
+
+                      <option value="43">Sitting</option>
+
+                      <option value="44">Skating - 10/mph</option>
+
+                      <option value="45">Skiing (cross country)</option>
+
+                      <option value="46">Skiing (downhill)</option>
+
+                      <option value="47">Skiing (water)</option>
+
+                      <option value="71">Skipping Rope (Jumping Rope)</option>
+
+                      <option value="168">Snow Boarding</option>
+
+                      <option value="65">Soccer</option>
+
+                      <option value="48">Softball</option>
+
+                      <option value="166">Spa</option>
+
+                      <option value="82">Spinning</option>
+
+                      <option value="49">Squash or Handball</option>
+
+                      <option value="88">Squats (Legs)</option>
+
+                      <option value="81">Stair Climber (Stepper)</option>
+
+                      <option value="83">Stairs (Climbing Stairs)</option>
+
+                      <option value="50">Standing</option>
+
+                      <option value="51">Stretching (yoga)</option>
+
+                      <option value="101">Studying</option>
+
+                      <option value="143">Surfing</option>
+
+                      <option value="52">Swimming (fast)</option>
+
+                      <option value="53">Swimming (moderate)</option>
+
+                      <option value="54">Swimming (slow)</option>
+
+                      <option value="177">T25</option>
+
+                      <option value="97">Table Tennis (Ping Pong)</option>
+
+                      <option value="150">Tae Bo</option>
+
+                      <option value="127">Taekwondo</option>
+
+                      <option value="133">Teaching</option>
+
+                      <option value="55">Tennis</option>
+
+                      <option value="104">Trampolining</option>
+
+                      <option value="75">Treadmill</option>
+
+                      <option value="159">Tree Climbing (Ropes)</option>
+
+                      <option value="122">TRX</option>
+
+                      <option value="114">Vacuuming</option>
+
+                      <option value="129">Vibrating Platform Machine</option>
+
+                      <option value="56">Volleyball</option>
+
+                      <option value="139">VTT</option>
+
+                      <option value="57">Walking (brisk) - 4/mph</option>
+
+                      <option value="58">Walking (exercise) - 3.5/mph</option>
+
+                      <option value="59">Walking (moderate) - 3/mph</option>
+
+                      <option value="60">Walking (slow) - 2/mph</option>
+
+                      <option value="154">Washing Car</option>
+
+                      <option value="120">Washing Dishes</option>
+
+                      <option value="126">Watching TV/Computer</option>
+
+                      <option value="108">Water Aerobics</option>
+
+                      <option value="138">Water Biking/Running</option>
+
+                      <option value="100">Weight Training (Bodybuilding)</option>
+
+                      <option value="69">Weight Training (moderate)</option>
+
+                      <option value="113">Wii Fit (Electronic Games)</option>
+
+                      <option value="78">Working</option>
+
+                      <option value="132">XCO</option>
+
+                      <option value="61">Yard Work (gardening)</option>
+
+                      <option value="79">Yoga</option>
+
+                      <option value="156">Yoga (Hot)</option>
+
+                      <option value="80">Zumba</option>
+
+
+                    </select>
+                    <input type="number" name="time" id="sportTime" class="form-control" placeholder="min">
+                    <select name="oldType" id="replaceSelect" class="form-control">
+                      {% for item in record %}
+                        <option value="{{ item.exercise_id }}">{{ item.exercise_name }} {{ item.minutes }}min</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-outline-primary mb-2">Change</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% include 'footer.html' %}
+{% endblock %}
+{% block script %}
+  <script src="{% static 'assets/js/acticities.js' %}"></script>
+{% endblock %}

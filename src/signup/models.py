@@ -5,10 +5,18 @@ from app.fatsecret import Fatsecret
 
 
 class ProfileManager(models.Manager):
-    def create_profile(self, user):
+    def create_profile(self, user, current_weight, current_height, goal_weight):
         fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get('API_SECRET'))
         session_token = fs.profile_create()
-        profile = self.create(user=user, auth_token=session_token[0], auth_secret=session_token[1])
+        fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get('API_SECRET'), session_token)
+        fs.weight_update(current_weight_kg=current_weight, goal_weight_kg=current_height, current_height_cm=goal_weight)
+        profile = self.create(user=user,
+                              auth_token=session_token[0],
+                              auth_secret=session_token[1],
+                              current_weight=current_weight,
+                              current_height=current_height,
+                              goal_weight=goal_weight
+                              )
         return profile
 
 
@@ -17,6 +25,9 @@ class Profile(models.Model):
     create_date = models.DateField(auto_now_add=True)
     auth_token = models.CharField(max_length=50, null=True, blank=True)
     auth_secret = models.CharField(max_length=50, null=True, blank=True)
+    current_weight = models.IntegerField(null=True, blank=True)
+    current_height = models.IntegerField(null=True, blank=True)
+    goal_weight = models.IntegerField(null=True, blank=True)
     objects = ProfileManager()
 
     class Meta:
@@ -24,20 +35,7 @@ class Profile(models.Model):
         app_label = 'signup'
 
     def __str__(self):
-        return self.user.username
-
-    def get_picture(self):
-        no_picture = 'https://lh3.googleusercontent.com/-EZnfGPvftkI/AAAAAAAAAAI/AAAAAAAAA5I/in5JbhZ3bp8/s120-p-rw-no/photo.jpg'
-        return no_picture
-
-    def get_screen_name(self):
-        try:
-            if self.user.get_full_name():
-                return self.user.get_full_name()
-            else:
-                return self.user.username
-        except Exception:
-            return self.user.username
+        return self.user.get_username()
 
     def get_session_token(self):
         if self.auth_token and self.auth_secret:
@@ -45,4 +43,12 @@ class Profile(models.Model):
         else:
             return None
 
+    def get_current_weight(self):
+        return self.current_weight
+
+    def get_current_height(self):
+        return self.current_height
+
+    def get_goal_weight(self):
+        return self.goal_weight
 

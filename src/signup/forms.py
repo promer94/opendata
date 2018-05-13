@@ -62,11 +62,29 @@ class SignUpForm(forms.ModelForm):
         required=True,
         max_length=75,
         validators=[unique_email_validator, validate_email])
+    current_weight = forms.IntegerField(
+        label='Current weight(kg)',
+        widget=forms.NumberInput(attrs={'class': 'form-control'}),
+        required=True,
+        min_value=40,
+        max_value=300)
+    current_height = forms.IntegerField(
+        label='Current height(cm)',
+        widget=forms.NumberInput(attrs={'class': 'form-control'}),
+        required=True,
+        min_value=100,
+        max_value=250)
+    goal_weight = forms.IntegerField(
+        label='Goal weight(kg)',
+        widget=forms.NumberInput(attrs={'class': 'form-control'}),
+        required=True,
+        min_value=40,
+        max_value=300)
 
     class Meta:
         model = User
         exclude = ['last_login', 'date_joined']
-        fields = ['username', 'email', 'password', 'confirm_password', ]
+        fields = ['username', 'email', 'password', 'confirm_password',]
 
     def clean(self):
         super(SignUpForm, self).clean()

@@ -40,6 +40,7 @@
                   <label for="{{ item.food_id }}foodId" class="sr-only"></label>
                   <label for="{{ item.food_id }}food_meal" class="sr-only"></label>
                   <label for="{{ item.food_id }}serving_methods" class="sr-only"></label>
+                  <label for="{{ item.food_id }}foodName" class="sr-only"></label>
                   <select id="{{ item.food_id }}food_meal" class="form-control" name="meal">
                     <option value="breakfast">Breakfast</option>
                     <option value="lunch">Lunch</option>
@@ -51,10 +52,11 @@
                       <option value="{{ serving_method.serving_id }}">{{ serving_method.serving_description }}, Calories:{{ serving_method.calories }}</option>
                     {% endfor %}
                   </select>
+                  <input type="text" class="d-none" value="{{ item.food_name }}" name="foodName" id="{{ item.food_id }}foodName"/>
                   <input type="text" class="d-none" value="{{ item.food_id }}" name="food" id="{{ item.food_id }}foodId"/>
                   <input type="text" class="form-control" id="{{ item.food_id }}unitNumber"
                          placeholder="Number of the unit" name="unit">
-                  <button id="{{ item.food_id }}food-entry-submit" type="submit" class="btn btn-primary">Add</button>
+                  <button id="{{ item.food_id }}food-entry-submit" type="submit" class="btn btn-outline-primary">Add</button>
                 </div>
               </form>
             </div>
@@ -79,7 +81,7 @@
         </li>
       {% endif %}
     </ul>
-    <form action="/search" class="form-inline pagination justify-content-center row">
+    <form action="{% url 'search' %}" class="form-inline pagination justify-content-center row">
       <div class="form-group mx-sm-1 mb-2">
         <label for="pageNumber" class="sr-only"></label>
         <label for="foodName" class="sr-only"></label>

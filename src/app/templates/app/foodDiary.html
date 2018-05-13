@@ -1,5 +1,121 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
+  {% include 'nav.html' %}
+  <div class="my-3 my-md-5">
+    <div class="container">
+      <div class="page-header"><h2>Today calories: {{ food_calories }}kcal</h2></div>
+      <div class="row row-card">
+        {% if pie_chart_data %}
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if breakfast %}
+          <div class="col-lg-6 col-xl-4">
+            <div class="card">
+              <div class="card-header">Breakfast</div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  {% for item in breakfast %}
+                    <li class="list-group-item card-text">
+                      <p>{{ item.food_entry_name }} {{ item.calories }}kcal</p>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if lunch %}
+          <div class="col-lg-6 col-xl-4">
+            <div class="card">
+              <div class="card-header">Lunch</div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  {% for item in lunch %}
+                    <li class="list-group-item card-text">
+                      <p>{{ item.food_entry_name }} {{ item.calories }}kcal</p>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if dinner %}
+          <div class="col-lg-6 col-xl-4">
+            <div class="card">
+              <div class="card-header">Dinner</div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  {% for item in dinner %}
+                    <li class="list-group-item card-text">
+                      <p>{{ item.food_entry_name }} {{ item.calories }}kcal</p>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if other %}
+          <div class="col-lg-6 col-xl-4">
+            <div class="card">
+              <div class="card-header">Other</div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  {% for item in other %}
+                    <li class="list-group-item card-text">
+                      <p>{{ item.food_entry_name }} {{ item.calories }}kcal</p>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% include 'footer.html' %}
+{% endblock %}
+{% block script %}
+  {% if pie_chart_data %}
+    <script>
+    const ctx = document.getElementById("myChart");
+const myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Carbohydrate', 'Fat', 'Protein'],
+        datasets: [{
+            data: [{{ pie_chart_data.Carbohydrate}}, {{ pie_chart_data.Fat}}, {{ pie_chart_data.Protein}}],
+            backgroundColor: [
+                'rgba(255, 0, 0, 0.5)',
+                'rgba(0, 255, 0, 0.5)',
+                'rgba(0, 0, 255, 0.5)',
+            ],
+        }]
+    },
+    options: {
+        responsive: true,
+        legend: {
+            position: 'top'
+        },
+        title: {
+            display: true,
+            text: 'Today\'s major nutrients'
+        },
+        animation: {
+            animateScale: true,
+            animateRotate: true
+        }
+    }
+});
+    </script>
+  {% endif %}
 {% endblock %}
