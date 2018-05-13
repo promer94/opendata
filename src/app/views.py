@@ -102,25 +102,26 @@ def food_diary(request):
     lunch = []
     dinner = []
     other = []
-    for food_ids in id_collection:
-        food = fs.food_entries_get(food_ids.__str__())[0]
+    if id_collection is not None:
+        for food_ids in id_collection:
+            food = fs.food_entries_get(food_ids.__str__())[0]
 
-        date_int = int(food['date_int'])
-        date_string = datetime.utcfromtimestamp(date_int*24*60*60).strftime('%Y%m%d')
-        food['date_int'] = date_string
+            date_int = int(food['date_int'])
+            date_string = datetime.utcfromtimestamp(date_int*24*60*60).strftime('%Y%m%d')
+            food['date_int'] = date_string
 
-        if food['meal'] == 'Breakfast':
-            breakfast.append(food)
-        elif food['meal'] == 'Lunch':
-            lunch.append(food)
-        elif food['meal'] == 'Dinner':
-            dinner.append(food)
-        elif food['meal'] == 'Other':
-            other.append(food)
+            if food['meal'] == 'Breakfast':
+                breakfast.append(food)
+            elif food['meal'] == 'Lunch':
+                lunch.append(food)
+            elif food['meal'] == 'Dinner':
+                dinner.append(food)
+            elif food['meal'] == 'Other':
+                other.append(food)
 
     food_record = fs.food_entries_get_month()
     pie_chart_data = {}
-    if food_record is not None:
+    if len(food_record) != 0:
         food_record = food_record[-1]
         pie_chart_data['Fat'] = float(food_record['fat'])
         pie_chart_data['Protein'] = float(food_record['protein'])
