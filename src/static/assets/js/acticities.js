@@ -2,11 +2,41 @@ $(document).ready(function () {
     const ctx = document.getElementById("myChart");
     let chart;
 
-    function getRandomColor() {
+    let getColor = function() {
         return "rgba(" + Math.floor(Math.random() * 255) + ","
             + Math.floor(Math.random() * 255) + ","
-            + Math.floor(Math.random() * 255) + ",0.5)";
-
+            + Math.floor(Math.random() * 255) + ",0.3)";
+    };
+    function drawChart(labelSet,dataSet, getColor){
+        let colorSet =[];
+        for (let i = 0; i < dataSet.length; i++) {
+            colorSet[i] = (getColor())
+        }
+        const myChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: labelSet,
+                datasets: [{
+                    label: 'Activities',
+                    data: dataSet,
+                    backgroundColor: colorSet,
+                    borderColor: colorSet,
+                    borderWidth: 0.25
+                }]
+            },
+            options: {
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Activities'
+                    },
+                    animation: {
+                        animateScale: true
+                    }
+                }
+            }
+        });
+        return myChart;
     }
 
     $.ajax({
@@ -14,43 +44,9 @@ $(document).ready(function () {
         url: '/activity/get'
     }).done(
         function (response) {
-            labelSet = response.label;
-            dataSet = response.data;
-            colorSet = [];
-            for (let i = 0; i < dataSet.length; i++) {
-                colorSet[i] = (getRandomColor())
-            }
-            const myChart = new Chart(ctx, {
-                type: 'horizontalBar',
-                data: {
-                    labels: labelSet,
-                    datasets: [{
-                        label: 'activities',
-                        data: dataSet,
-                        backgroundColor: colorSet,
-                        borderColor: colorSet,
-                        borderWidth: 0.25
-                    }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    },
-                    title: {
-                        display: true,
-                        text: 'Activities'
-                    }
-                }
-            });
-            chart = myChart
-
+            chart = drawChart(response.label, response.data, getColor);
         }
     );
-
     $(".form-inline.pagination.justify-content-center").submit(function (e) {
         e.preventDefault();
         let data = $(e.target).serialize();
@@ -60,11 +56,14 @@ $(document).ready(function () {
             data: data
         }).done(
             function (response) {
-                chart.data.labele = response.label;
+                chart.data.labels = response.label;
                 chart.data.datasets[0].data = response.data;
+                for (let i = 0; i < response.label.length; i++) {
+                    chart.data.datasets[0].backgroundColor[i] = (getColor())
+                }
                 chart.update();
-                htmlString = `<h2>Today activities: ${response.activities_calories}kcal<h2>`;
-                $(".page-header").html(htmlString)
+                const htmlString = `<h2>Today activities: ${response.activities_calories}kcal<h2>`;
+                $(".page-header").html(htmlString);
             }
         )
     })
