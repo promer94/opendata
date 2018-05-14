@@ -1,6 +1,8 @@
 import os
-from django.db import models
+
 from django.contrib.auth.models import User
+from django.db import models
+
 from app.fatsecret import Fatsecret
 
 
@@ -8,8 +10,10 @@ class ProfileManager(models.Manager):
     def create_profile(self, user, current_weight, current_height, goal_weight):
         fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get('API_SECRET'))
         session_token = fs.profile_create()
-        fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get('API_SECRET'), session_token)
-        fs.weight_update(current_weight_kg=current_weight, goal_weight_kg=current_height, current_height_cm=goal_weight)
+        fs = Fatsecret(os.environ.get('API_KEY'),
+                       os.environ.get('API_SECRET'), session_token)
+        fs.weight_update(current_weight_kg=current_weight,
+                         goal_weight_kg=current_height, current_height_cm=goal_weight)
         profile = self.create(user=user,
                               auth_token=session_token[0],
                               auth_secret=session_token[1],
@@ -51,4 +55,3 @@ class Profile(models.Model):
 
     def get_goal_weight(self):
         return self.goal_weight
-

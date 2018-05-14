@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Profile
+
 from app.admin import FavoriteFoodInline, FoodEntryInline
 
+from .models import Profile
 
 # Register your models here.
 
@@ -18,7 +19,8 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ['user', 'create_date']
     fieldsets = [
         (None, {'fields': ['user']}),
-        ('Health data', {'fields': ['current_weight', 'current_height', 'goal_weight']})
+        ('Health data', {'fields': [
+         'current_weight', 'current_height', 'goal_weight']})
     ]
     inlines = [FavoriteFoodInline, FoodEntryInline]
 

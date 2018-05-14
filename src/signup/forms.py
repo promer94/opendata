@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.utils.translation import gettext as _
 from django.core.validators import validate_email
+from django.utils.translation import gettext as _
 
 
 def forbidden_username_validator(value):
@@ -23,22 +23,26 @@ def forbidden_username_validator(value):
                            'activity', 'questions', 'articles', 'network', ]
 
     if value.lower() in forbidden_usernames:
-        raise ValidationError(_('This is a reserved word.'), code='name_forbid')
+        raise ValidationError(
+            _('This is a reserved word.'), code='name_forbid')
 
 
 def invalid_username_validator(value):
     if '@' in value or '+' in value or '-' in value:
-        raise ValidationError(_('Enter a valid username.'),  code='name_invalid',)
+        raise ValidationError(
+            _('Enter a valid username.'),  code='name_invalid',)
 
 
 def unique_email_validator(value):
     if User.objects.filter(email__iexact=value).exists():
-        raise ValidationError(_('User with this Email already exists.'), code='email_exists')
+        raise ValidationError(
+            _('User with this Email already exists.'), code='email_exists')
 
 
 def unique_username_ignore_case_validator(value):
     if User.objects.filter(username__iexact=value).exists():
-        raise ValidationError(_('User with this Username already exists.'), code='name_exists')
+        raise ValidationError(
+            _('User with this Username already exists.'), code='name_exists')
 
 
 class SignUpForm(forms.ModelForm):
@@ -47,7 +51,8 @@ class SignUpForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'class': 'form-control'}),
         max_length=30,
         required=True,
-        validators=[forbidden_username_validator, invalid_username_validator, unique_username_ignore_case_validator]
+        validators=[forbidden_username_validator,
+                    invalid_username_validator, unique_username_ignore_case_validator]
     )
     password = forms.CharField(
         label='Password',
@@ -84,7 +89,7 @@ class SignUpForm(forms.ModelForm):
     class Meta:
         model = User
         exclude = ['last_login', 'date_joined']
-        fields = ['username', 'email', 'password', 'confirm_password',]
+        fields = ['username', 'email', 'password', 'confirm_password', ]
 
     def clean(self):
         super(SignUpForm, self).clean()
@@ -94,4 +99,3 @@ class SignUpForm(forms.ModelForm):
             message = 'Passwords don\'t match'
             self.add_error('password', message)
         return self.cleaned_data
-

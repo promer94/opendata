@@ -5,6 +5,7 @@
 """
 
 import datetime
+
 from rauth.service import OAuth1Service
 
 
@@ -69,7 +70,8 @@ class Fatsecret:
         :type callback_url: str
         """
         self.request_token, self.request_token_secret = \
-            self.oauth.get_request_token(method='GET', params={'oauth_callback': callback_url})
+            self.oauth.get_request_token(
+                method='GET', params={'oauth_callback': callback_url})
 
         return self.oauth.get_authorize_url(self.request_token)
 
@@ -118,7 +120,8 @@ class Fatsecret:
                     code = response.json()[key]['code']
                     message = response.json()[key]['message']
                     if code == 2:
-                        raise AuthenticationError(2, "This api call requires an authenticated session")
+                        raise AuthenticationError(
+                            2, "This api call requires an authenticated session")
 
                     elif code in [1, 10, 11, 12, 20, 21]:
                         raise GeneralError(code, message)
@@ -138,9 +141,9 @@ class Fatsecret:
 
                 elif key == 'foods':
                     return response.json()[key]['food'], \
-                           response.json()[key]['max_results'], \
-                           response.json()[key]['page_number'], \
-                           response.json()[key]['total_results']
+                        response.json()[key]['max_results'], \
+                        response.json()[key]['page_number'], \
+                        response.json()[key]['total_results']
 
                 elif key == 'recipes':
                     return response.json()[key]['recipe']
@@ -194,7 +197,8 @@ class Fatsecret:
         :type number_of_units: float
         """
 
-        params = {'method': 'food.add_favorite', 'format': 'json', 'food_id': food_id}
+        params = {'method': 'food.add_favorite',
+                  'format': 'json', 'food_id': food_id}
 
         if serving_id and number_of_units:
             params['serving_id'] = serving_id
@@ -213,7 +217,8 @@ class Fatsecret:
         :type number_of_units: float
         """
 
-        params = {'method': 'food.delete_favorite', 'format': 'json', 'food_id': food_id}
+        params = {'method': 'food.delete_favorite',
+                  'format': 'json', 'food_id': food_id}
 
         if serving_id and number_of_units:
             params['serving_id'] = serving_id
@@ -280,7 +285,8 @@ class Fatsecret:
         :param max_results: total results per page (default 20)
         :type max_results: int
         """
-        params = {'method': 'foods.search', 'search_expression': search_expression, 'format': 'json'}
+        params = {'method': 'foods.search',
+                  'search_expression': search_expression, 'format': 'json'}
         if page_number is not None and max_results is not None:
             params = {'method': 'foods.search',
                       'search_expression': search_expression,
@@ -298,7 +304,8 @@ class Fatsecret:
         :type recipe_id: str
         """
 
-        params = {'method': 'recipes.add_favorites', 'format': 'json', 'recipe_id': recipe_id}
+        params = {'method': 'recipes.add_favorites',
+                  'format': 'json', 'recipe_id': recipe_id}
 
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
@@ -309,7 +316,8 @@ class Fatsecret:
         :type recipe_id: str
         """
 
-        params = {'method': 'recipes.delete_favorites', 'format': 'json', 'recipe_id': recipe_id}
+        params = {'method': 'recipes.delete_favorites',
+                  'format': 'json', 'recipe_id': recipe_id}
 
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
@@ -320,7 +328,8 @@ class Fatsecret:
         :type recipe_id: str
         """
 
-        params = {'method': 'recipe.get', 'format': 'json', 'recipe_id': recipe_id}
+        params = {'method': 'recipe.get',
+                  'format': 'json', 'recipe_id': recipe_id}
 
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
@@ -348,7 +357,8 @@ class Fatsecret:
         :type max_results: int
         """
 
-        params = {'method': 'recipes.search', 'search_expression': search_expression, 'format': 'json'}
+        params = {'method': 'recipes.search',
+                  'search_expression': search_expression, 'format': 'json'}
 
         if recipe_type:
             params['recipe_type'] = recipe_type
@@ -378,7 +388,8 @@ class Fatsecret:
         :type meals: list
         """
 
-        params = {'method': 'saved_meal.create', 'format': 'json', 'saved_meal_name': meal_name}
+        params = {'method': 'saved_meal.create',
+                  'format': 'json', 'saved_meal_name': meal_name}
         if meal_desc:
             params['saved_meal_description'] = meal_desc
         if meals:
@@ -393,7 +404,8 @@ class Fatsecret:
         :type meal_id: str
         """
 
-        params = {'method': 'saved_meal.delete', 'format': 'json', 'saved_meal_id': meal_id}
+        params = {'method': 'saved_meal.delete',
+                  'format': 'json', 'saved_meal_id': meal_id}
 
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
@@ -411,7 +423,8 @@ class Fatsecret:
         :type meals: str
         """
 
-        params = {'method': 'saved_meal.edit', 'format': 'json', 'saved_meal_id': meal_id}
+        params = {'method': 'saved_meal.edit',
+                  'format': 'json', 'saved_meal_id': meal_id}
 
         if new_name:
             params['saved_meal_name'] = new_name
@@ -463,7 +476,8 @@ class Fatsecret:
         :type meal_item_id: str
         """
 
-        params = {'method': 'saved_meal_item.delete', 'format': 'json', 'saved_meal_item_id': meal_item_id}
+        params = {'method': 'saved_meal_item.delete',
+                  'format': 'json', 'saved_meal_item_id': meal_item_id}
 
         response = self.session.get(self.api_url, params)
         return self.valid_response(response)
@@ -481,7 +495,8 @@ class Fatsecret:
         :type num_units: float
         """
 
-        params = {'method': 'saved_meal_item.edit', 'format': 'json', 'saved_meal_item_id': meal_item_id}
+        params = {'method': 'saved_meal_item.edit',
+                  'format': 'json', 'saved_meal_item_id': meal_item_id}
 
         if item_name:
             params['saved_meal_item_name'] = item_name
@@ -497,7 +512,8 @@ class Fatsecret:
         :type meal_id: str
         """
 
-        params = {'method': 'saved_meal_items.get', 'format': 'json', 'saved_meal_id': meal_id}
+        params = {'method': 'saved_meal_items.get',
+                  'format': 'json', 'saved_meal_id': meal_id}
 
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
@@ -545,7 +561,8 @@ class Fatsecret:
         :type user_id: str
         """
 
-        params = {'method': 'profile.get_auth', 'format': 'json', 'user_id': user_id}
+        params = {'method': 'profile.get_auth',
+                  'format': 'json', 'user_id': user_id}
 
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
@@ -659,7 +676,8 @@ class Fatsecret:
         :type food_entry_id: str
         """
 
-        params = {'method': 'food_entry.delete', 'format': 'json', 'food_entry_id': food_entry_id}
+        params = {'method': 'food_entry.delete',
+                  'format': 'json', 'food_entry_id': food_entry_id}
 
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
@@ -681,7 +699,8 @@ class Fatsecret:
         :type meal: str
         """
 
-        params = {'method': 'food_entry.edit', 'food_entry_id': food_entry_id, 'format': 'json'}
+        params = {'method': 'food_entry.edit',
+                  'food_entry_id': food_entry_id, 'format': 'json'}
 
         if entry_name:
             params['food_entry_name'] = entry_name
@@ -755,7 +774,8 @@ class Fatsecret:
         :param date: Day of exercises to use as the template (default value is the current day).
         :type date: datetime.datetime
         """
-        params = {'method': 'exercise_entries.get_month', 'format': 'json', 'days': int(days)}
+        params = {'method': 'exercise_entries.get_month',
+                  'format': 'json', 'days': int(days)}
 
         if date is not None:
             params['date'] = self.unix_time(date)

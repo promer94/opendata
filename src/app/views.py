@@ -1,11 +1,15 @@
 import os
+from datetime import date, datetime
+
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from .fatsecret import Fatsecret
+
 from signup.models import Profile
+
+from .fatsecret import Fatsecret
 from .models import FoodEntry
-from datetime import date, datetime
+
 # Create your views here.
 
 
@@ -17,16 +21,19 @@ def search(request):
                    os.environ.get('API_SECRET'))
 
     # Pagination
-    result, max_results, page_number, total_result = fs.foods_search(food, page_number=page - 1, max_results=6)
+    result, max_results, page_number, total_result = fs.foods_search(
+        food, page_number=page - 1, max_results=6)
     total_result = int(total_result)
     total_page = int(int(total_result) / int(max_results)) + 1
 
     # Get serving_id
     for item in result:
         if isinstance(fs.food_get(item['food_id'])['servings']['serving'], dict):
-            item['serving_methods'] = [fs.food_get(item['food_id'])['servings']['serving']]
+            item['serving_methods'] = [fs.food_get(
+                item['food_id'])['servings']['serving']]
         elif isinstance(fs.food_get(item['food_id'])['servings']['serving'], list):
-            item['serving_methods'] = fs.food_get(item['food_id'])['servings']['serving']
+            item['serving_methods'] = fs.food_get(
+                item['food_id'])['servings']['serving']
         else:
             pass
 
@@ -64,7 +71,8 @@ def entry_create(request):
         current_profile = Profile.objects.get(user=current_user)
 
         session_token = current_profile.get_session_token()
-        fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get('API_SECRET'), session_token=session_token)
+        fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get(
+            'API_SECRET'), session_token=session_token)
 
         current_date = date.today().strftime("%Y%m%d")
         food_id = request.POST.get('food')
@@ -82,7 +90,8 @@ def entry_create(request):
                                                  unit_number,
                                                  meal
                                                  )['value']
-            FoodEntry.objects.create(profile=current_profile, food_entry_id=food_entry_id)
+            FoodEntry.objects.create(
+                profile=current_profile, food_entry_id=food_entry_id)
             return JsonResponse({'success': 1})
     else:
         raise HttpResponseBadRequest
@@ -91,7 +100,8 @@ def entry_create(request):
 @login_required(login_url='/')
 def food_diary(request):
     current_profile = Profile.objects.get(user=request.user)
-    fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get('API_SECRET'), current_profile.get_session_token())
+    fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get(
+        'API_SECRET'), current_profile.get_session_token())
     id_collection = list(current_profile.foodentry_set.all())
     food_record = fs.food_entries_get_month()
     food_calories = 0
@@ -107,7 +117,8 @@ def food_diary(request):
             food = fs.food_entries_get(food_ids.__str__())[0]
 
             date_int = int(food['date_int'])
-            date_string = datetime.utcfromtimestamp(date_int*24*60*60).strftime('%Y%m%d')
+            date_string = datetime.utcfromtimestamp(
+                date_int*24*60*60).strftime('%Y%m%d')
             food['date_int'] = date_string
 
             if food['meal'] == 'Breakfast':
@@ -140,7 +151,8 @@ def food_diary(request):
 @login_required(login_url='/')
 def activity(request):
     current_profile = Profile.objects.get(user=request.user)
-    fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get('API_SECRET'), current_profile.get_session_token())
+    fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get(
+        'API_SECRET'), current_profile.get_session_token())
     record = fs.exercise_entries_get()
     activities_record = fs.exercise_entries_get_month()
     activities_calories = 0
@@ -155,11 +167,13 @@ def activity(request):
 @login_required(login_url='/')
 def activities_add(request):
     current_profile = Profile.objects.get(user=request.user)
-    fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get('API_SECRET'), current_profile.get_session_token())
+    fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get(
+        'API_SECRET'), current_profile.get_session_token())
     new_activity = request.GET.get('newType')
     time = int(request.GET.get('time'))
     old_activity = request.GET.get('oldType')
-    fs.exercise_entry_edit(shift_to_id=new_activity, shift_from_id=old_activity, minutes=time)
+    fs.exercise_entry_edit(shift_to_id=new_activity,
+                           shift_from_id=old_activity, minutes=time)
     fs.exercise_entries_commit_day()
     record = fs.exercise_entries_get()
     name = []
@@ -181,7 +195,8 @@ def activities_add(request):
 @login_required(login_url='/')
 def activities_get(request):
     current_profile = Profile.objects.get(user=request.user)
-    fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get('API_SECRET'), current_profile.get_session_token())
+    fs = Fatsecret(os.environ.get('API_KEY'), os.environ.get(
+        'API_SECRET'), current_profile.get_session_token())
     activities_record = fs.exercise_entries_get_month()
     activities_calories = 0
     if activities_record is not None:
@@ -195,5 +210,3 @@ def activities_get(request):
         name.append(item['exercise_name'])
         data.append(int(item['calories']))
     return JsonResponse({'label': name, 'data': data})
-
-
